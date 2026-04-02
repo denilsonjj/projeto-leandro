@@ -416,7 +416,7 @@
 
     <section class="py-16 md:py-20" id="servicos">
       <div class="site-container grid grid-cols-1 lg:grid-cols-2 gap-16">
-        <div>
+        <div class="flex flex-col h-full">
           <h2 class="section-title mb-10">Como funciona meu processo</h2>
 
           <div class="grid gap-7" id="processo">
@@ -455,6 +455,16 @@
                 <p class="text-[#5f6773] mt-1">Transparência total sobre resultados e próximos passos.</p>
               </div>
             </div>
+          </div>
+
+          <div class="mt-10 flex-1 flex flex-col justify-center rounded-2xl border border-[rgba(194,143,118,0.34)] bg-white/60 p-6 shadow-[0_12px_28px_rgba(15,34,56,0.08)]">
+            <p class="text-sm font-extrabold tracking-[0.08em] text-[#c28f76] uppercase mb-3">E NÃO É SÓ ISSO...</p>
+            <p class="text-[#2a3342] text-lg leading-relaxed">
+              Guardei o melhor para o final. Se converter leads é o seu desafio, eu tenho a solução e um benefício que você não vai encontrar em nenhum outro lugar.
+            </p>
+            <p class="text-[#2a3342] text-lg leading-relaxed mt-3">
+              Garanta seu acesso no formulário abaixo e saiba como tráfego e gestão comercial estratégica podem transformar seu faturamento!!
+            </p>
           </div>
         </div>
 
@@ -556,7 +566,11 @@
             <p class="text-[#5f6773] text-lg mt-3">Preencha os campos e receba um direcionamento claro para escalar suas campanhas.</p>
           </div>
 
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5" id="lead-form">
+          <form action="https://formsubmit.co/ajax/lm.impulseads@gmail.com" class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5" id="lead-form" method="POST">
+            <input name="_subject" type="hidden" value="Novo lead - LM Impulse Ads" />
+            <input name="_captcha" type="hidden" value="false" />
+            <input name="_template" type="hidden" value="table" />
+            <input name="_honey" type="text" style="display:none" tabindex="-1" autocomplete="off" />
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-[#56606e] mb-2">Nome</label>
               <input class="input-base" name="nome" placeholder="Seu nome" required="" type="text" />
@@ -643,25 +657,54 @@
       const successBox = document.getElementById("obrigado");
       if (!form || !successBox) return;
 
-      form.addEventListener("submit", function (event) {
+      form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        if (typeof window.fbq === "function") {
-          window.fbq("track", "Lead");
-        }
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "generate_lead", {
-            event_category: "lead_form",
-            event_label: "landing_page_form",
-          });
-        }
-        if (Array.isArray(window.dataLayer)) {
-          window.dataLayer.push({ event: "lead_form_submit" });
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton ? submitButton.textContent : "";
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Enviando...";
         }
 
-        form.classList.add("hidden");
-        successBox.classList.remove("hidden");
-        window.location.hash = "obrigado";
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+            },
+            body: new FormData(form),
+          });
+
+          if (!response.ok) {
+            throw new Error("Falha ao enviar formulário");
+          }
+
+          if (typeof window.fbq === "function") {
+            window.fbq("track", "Lead");
+          }
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "generate_lead", {
+              event_category: "lead_form",
+              event_label: "landing_page_form",
+            });
+          }
+          if (Array.isArray(window.dataLayer)) {
+            window.dataLayer.push({ event: "lead_form_submit" });
+          }
+
+          form.classList.add("hidden");
+          successBox.classList.remove("hidden");
+          window.location.hash = "obrigado";
+        } catch (error) {
+          window.alert("Não foi possível enviar agora. Tente novamente em instantes ou fale no WhatsApp.");
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+          }
+        }
       });
     })();
   </script>
