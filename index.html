@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>LM Impulse Ads | Tráfego Pago com Estratégia e Precisão</title>
+  <link href="assets/favicon-lm.png" rel="icon" type="image/png" />
+  <link href="assets/favicon-lm.png" rel="apple-touch-icon" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@300,0&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0f2238;
+      --navy-soft: #17314f;
+      --navy-deep: #0b1a2a;
+      --accent: #c28f76;
+      --accent-soft: #d9b19f;
+      --text: #142031;
+      --muted: #58606d;
+      --line: rgba(194, 143, 118, 0.34);
+      --panel: rgba(255, 255, 255, 0.62);
+      --panel-soft: rgba(255, 255, 255, 0.5);
+      --shadow: 0 24px 54px rgba(15, 34, 56, 0.14);
+      --shadow-soft: 0 14px 30px rgba(15, 34, 56, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      background: #f7f4ef;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    body::before {
+      z-index: -3;
+      background:
+        radial-gradient(circle at 10% 14%, rgba(255,255,255,0.98) 0 11%, rgba(244,236,226,0.92) 20%, rgba(219,205,189,0.52) 32%, transparent 48%),
+        radial-gradient(circle at 88% 10%, rgba(255,255,255,0.98) 0 10%, rgba(243,234,223,0.9) 19%, rgba(220,206,191,0.46) 30%, transparent 45%),
+        radial-gradient(circle at 22% 74%, rgba(255,255,255,0.94) 0 10%, rgba(241,232,220,0.78) 18%, rgba(214,200,184,0.4) 28%, transparent 41%),
+        radial-gradient(circle at 76% 84%, rgba(255,255,255,0.9) 0 10%, rgba(239,230,219,0.72) 18%, rgba(212,198,182,0.36) 29%, transparent 43%),
+        linear-gradient(120deg, #faf6f1 0%, #f2ebe1 42%, #fcfaf6 100%);
+    }
+
+    body::after {
+      z-index: -2;
+      opacity: 0.74;
+      mix-blend-mode: multiply;
+      background:
+        linear-gradient(102deg, transparent 0 14%, rgba(126, 132, 146, 0.16) 15%, transparent 16% 28%, rgba(141, 147, 160, 0.18) 29%, transparent 30% 100%),
+        linear-gradient(124deg, transparent 0 30%, rgba(124, 130, 142, 0.15) 31%, transparent 32% 47%, rgba(140, 146, 158, 0.17) 48%, transparent 49% 100%),
+        linear-gradient(76deg, transparent 0 41%, rgba(126, 132, 143, 0.14) 42%, transparent 43% 58%, rgba(142, 148, 160, 0.14) 59%, transparent 60% 100%),
+        linear-gradient(136deg, transparent 0 60%, rgba(126, 132, 145, 0.14) 61%, transparent 62% 74%, rgba(145, 151, 162, 0.13) 75%, transparent 76% 100%),
+        linear-gradient(94deg, transparent 0 72%, rgba(138, 145, 157, 0.13) 73%, transparent 74% 100%);
+      filter: blur(1.8px);
+      transform: scale(1.05);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+
+    .site-container {
+      width: min(calc(100% - 36px), 1140px);
+      margin: 0 auto;
+    }
+
+    .top-nav {
+      background: rgba(255, 255, 255, 0.48);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-title {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-link {
+      position: relative;
+      color: #334155;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #0f2238;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .btn-main {
+      height: 50px;
+      padding: 0 26px;
+      border-radius: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--navy-soft), var(--navy));
+      color: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px rgba(15, 34, 56, 0.2);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.62);
+      border: 1.5px solid rgba(194, 143, 118, 0.66);
+      color: #293647;
+    }
+
+    .hero-eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.98;
+      color: #0a1728;
+      font-size: clamp(2.65rem, 6vw, 4.8rem);
+    }
+
+    .hero-title .accent {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.66;
+      margin-top: 22px;
+      max-width: 580px;
+    }
+
+    .hero-frame {
+      border: 6px solid rgba(194, 143, 118, 0.9);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: rgba(255, 255, 255, 0.36);
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .trusted-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-soft);
+      backdrop-filter: blur(2px);
+    }
+
+    .trusted-label {
+      color: #b18e7d;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .trusted-item {
+      color: #a58a7d;
+      font-size: 1.28rem;
+      letter-spacing: 0.03em;
+      opacity: 0.92;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .section-title {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+      color: #0d1b2b;
+      font-size: clamp(2rem, 3.2vw, 3.05rem);
+    }
+
+    .step-number {
+      color: var(--accent);
+      font-family: "Manrope", sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      min-width: 54px;
+      line-height: 1;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(194, 143, 118, 0.26);
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
+      padding: 22px 18px;
+      transition: 0.24s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px rgba(15, 34, 56, 0.14);
+    }
+
+    .feature-icon {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .quote-strip {
+      background: linear-gradient(90deg, rgba(10, 28, 48, 0.95) 0%, rgba(21, 49, 78, 0.94) 52%, rgba(11, 30, 49, 0.93) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-strip::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0 25%, rgba(255,255,255,0.05) 26%, transparent 27% 60%, rgba(255,255,255,0.05) 61%, transparent 62% 100%);
+      mix-blend-mode: screen;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .quote-mark {
+      color: var(--accent-soft);
+      font-size: 5rem;
+      line-height: 0.8;
+      margin-bottom: 6px;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 24px;
+      box-shadow: 0 24px 44px rgba(7, 16, 30, 0.22);
+    }
+
+    .form-card {
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(194, 143, 118, 0.22);
+      box-shadow: var(--shadow);
+      border-radius: 22px;
+    }
+
+    .input-base {
+      height: 48px;
+      border-radius: 12px;
+      border: 1px solid rgba(131, 139, 151, 0.38);
+      background: rgba(255, 255, 255, 0.84);
+      width: 100%;
+      padding: 0 14px;
+      outline: none;
+    }
+
+    .input-base:focus {
+      border-color: var(--navy-soft);
+      box-shadow: 0 0 0 2px rgba(23, 49, 79, 0.16);
+    }
+
+    .input-area {
+      min-height: 120px;
+      resize: vertical;
+      padding: 10px 14px;
+    }
+
+    .footer-glass {
+      background: rgba(255, 255, 255, 0.34);
+      backdrop-filter: blur(2px);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-image {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-container {
+        width: min(calc(100% - 20px), 1140px);
+      }
+
+      .hero-image {
+        height: 320px;
+      }
+
+      .btn-main {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="selection:bg-[#c2d8ff] selection:text-[#0f2238]">
+  <header class="top-nav sticky top-0 z-50">
+    <div class="site-container flex items-center justify-between gap-6 py-5">
+      <a class="flex items-center no-underline" href="#inicio">
+        <img alt="Logo LM Impulse Ads" class="h-12 w-auto object-contain shrink-0" src="assets/logo-lm-impulse-transparent.png" />
+      </a>
+
+      <nav class="hidden md:flex items-center gap-10">
+        <a class="nav-link" href="#servicos">Serviços</a>
+        <a class="nav-link" href="#processo">Processo</a>
+        <a class="nav-link" href="#sobre">Sobre</a>
+        <a class="nav-link" href="#contato">Contato</a>
+      </nav>
+
+      <a class="btn-main btn-primary" href="#contato">Análise Estratégica</a>
+    </div>
+  </header>
+
+  <a class="fixed bottom-6 right-6 rounded-full p-4 w-16 h-16 flex items-center justify-center z-50 bg-green-500 text-white shadow-2xl shadow-green-500/40 hover:scale-110 hover:brightness-110 transition-all" href="https://wa.me/5512992503045?text=Ol%C3%A1%2C%20quero%20uma%20an%C3%A1lise%20estrat%C3%A9gica%20do%20meu%20tr%C3%A1fego%20pago." rel="noopener noreferrer" target="_blank">
+    <span class="material-symbols-outlined">chat</span>
+  </a>
+
+  <main>
+    <section class="pt-12 pb-12 md:pt-16 md:pb-16" id="inicio">
+      <div class="site-container grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-12 items-center">
+        <div>
+          <div class="hero-eyebrow">LM Impulse Ads</div>
+          <h1 class="hero-title">
+            Tráfego Pago com
+            <span class="accent">estratégia e precisão</span>
+          </h1>
+          <p class="hero-copy">
+            Gestão profissional de campanhas no Meta Ads e Google Ads para negócios que querem aumentar faturamento, atrair clientes qualificados e crescer de forma previsível.
+          </p>
+          <p class="hero-copy mt-5">
+            São várias campanhas gerenciadas, com resultados consistentes para negócios locais, e-commerces, infoprodutos dentre outros.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="btn-main btn-primary" href="#contato">Quero aumentar minhas vendas</a>
+            <a class="btn-main btn-outline" href="#servicos">Ver Serviços</a>
+          </div>
+        </div>
+
+        <div class="hero-frame">
+          <img alt="Painel de métricas de tráfego pago" class="hero-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqp7MA5h8ZpfOM9o8PrtHjq3WTaCc-9NDAOUbTwFSy3fs_-fP4hcG_d9SixOd6K23ELMKmITBWNMhOfKsT8iHlpCA5fc_KeBLLABG9Mnn5pWxhZdHycPRc3kTLXxm4uPDYvwyDBOndoTsbod_BWLJAIZ1JpXnrzOLfTay01YNUzw9UIahvd-M-TPNo9OXvBup-2rriwBkIwI5dUOQkz7a26_mv8qEsDbO5psbE79JouAUM2r572HyQVAEtUyn5usGmHdZAtxlWZYsW" />
+        </div>
+      </div>
+    </section>
+
+    <section class="trusted-band py-5">
+      <div class="site-container">
+        <div class="trusted-label mb-4">Benefícios e Diferenciais</div>
+        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center">
+          <span class="trusted-item">Estratégias personalizadas</span>
+          <span class="trusted-item">Acompanhamento próximo</span>
+          <span class="trusted-item">Testes contínuos</span>
+          <span class="trusted-item">Redução de custos</span>
+          <span class="trusted-item">Foco em lucro e escala</span>
+          <span class="trusted-item">Transparência total</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20" id="servicos">
+      <div class="site-container grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div>
+          <h2 class="section-title mb-10">Como funciona meu processo</h2>
+
+          <div class="grid gap-7" id="processo">
+            <div class="flex items-start gap-4">
+              <div class="step-number">01</div>
+              <div>
+                <div class="text-xl font-semibold text-[#1c2737]">Diagnóstico gratuito</div>
+                <p class="text-[#5f6773] mt-1">Entendo seu negócio, seu público e seus objetivos.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="step-number">02</div>
+              <div>
+                <div class="text-xl font-semibold text-[#1c2737]">Planejamento estratégico</div>
+                <p class="text-[#5f6773] mt-1">Desenho o funil ideal e defino, dentro de um projeto, a estrutura das campanhas.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="step-number">03</div>
+              <div>
+                <div class="text-xl font-semibold text-[#1c2737]">Criação e implementação</div>
+                <p class="text-[#5f6773] mt-1">Criação do projeto de campanhas, anúncios, segmentações e configurações.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="step-number">04</div>
+              <div>
+                <div class="text-xl font-semibold text-[#1c2737]">Monitoramento e otimização</div>
+                <p class="text-[#5f6773] mt-1">Acompanhamento diário, ajustes, cortes e testes.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="step-number">05</div>
+              <div>
+                <div class="text-xl font-semibold text-[#1c2737]">Relatórios e evolução</div>
+                <p class="text-[#5f6773] mt-1">Transparência total sobre resultados e próximos passos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-kicker">Serviços</div>
+          <h2 class="section-title mb-8">
+            Estratégias personalizadas de aquisição de clientes
+          </h2>
+          <p class="text-[#5f6773] leading-relaxed mb-6">
+            Nada de fórmulas prontas. Cada campanha é criada com foco no seu objetivo e no seu público visando o melhor resultado possível para seu negócio.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <article class="feature-card">
+              <span class="material-symbols-outlined feature-icon">account_balance</span>
+              <h3 class="font-bold text-xl leading-tight mb-2 text-[#1b2737]">Gestão completa de Tráfego Pago</h3>
+              <p class="text-[#616977] leading-relaxed">Criação, otimização e monitoramento diário das campanhas para garantir melhor desempenho e menor custo por resultado.</p>
+            </article>
+            <article class="feature-card">
+              <span class="material-symbols-outlined feature-icon">monitoring</span>
+              <h3 class="font-bold text-xl leading-tight mb-2 text-[#1b2737]">Criação de Estratégias Personalizadas</h3>
+              <p class="text-[#616977] leading-relaxed">Definição de funil, públicos, persona, dentre outros, focados exclusivamente em conversão.</p>
+            </article>
+            <article class="feature-card">
+              <span class="material-symbols-outlined feature-icon">build</span>
+              <h3 class="font-bold text-xl leading-tight mb-2 text-[#1b2737]">Otimização e Testes A/B</h3>
+              <p class="text-[#616977] leading-relaxed">Testes constantes de públicos, anúncios, criativos e páginas para acelerar resultados.</p>
+            </article>
+            <article class="feature-card">
+              <span class="material-symbols-outlined feature-icon">analytics</span>
+              <h3 class="font-bold text-xl leading-tight mb-2 text-[#1b2737]">Acompanhamento de Métricas</h3>
+              <p class="text-[#616977] leading-relaxed">Relatórios semanais claros e objetivos, com análise detalhada do que está funcionando.</p>
+            </article>
+            <article class="feature-card md:col-span-2">
+              <span class="material-symbols-outlined feature-icon">person_search</span>
+              <h3 class="font-bold text-xl leading-tight mb-2 text-[#1b2737]">Consultoria e Auditoria</h3>
+              <p class="text-[#616977] leading-relaxed">Para empresários que já anunciam, mas querem melhorar desempenho.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20" id="sobre">
+      <div class="site-container grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-10 items-center">
+        <div>
+          <div class="section-kicker">Sobre mim</div>
+          <h2 class="section-title mb-5">Leandro Machado</h2>
+          <p class="text-[#5f6773] text-lg leading-relaxed mb-4">
+            Sou Leandro Machado, especialista em gestão de tráfego pago e estratégias de geração de clientes para negócios locais e empresas que querem escalar.
+          </p>
+          <p class="text-[#5f6773] text-lg leading-relaxed mb-4">
+            Minha missão é simples: transformar anúncios em lucro real, usando métodos comprovados e acompanhamentos frequentes.
+          </p>
+          <p class="text-[#5f6773] text-lg leading-relaxed">
+            Trabalhei com diversos modelos de negócio e desenvolvi um processo claro, objetivo e eficiente para gerar resultados consistentes.
+          </p>
+        </div>
+        <div class="hero-frame max-w-[460px] justify-self-start lg:justify-self-end">
+          <img alt="Retrato profissional de Leandro Machado" class="hero-image h-[460px]" src="assets/leandro-profile-office.jpeg" />
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-strip py-16 md:py-20" id="insights">
+      <div class="site-container relative z-10 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
+        <div class="text-white max-w-[620px]">
+          <div class="quote-mark">“</div>
+          <p class="text-[clamp(1.45rem,2.5vw,2.2rem)] leading-[1.25] tracking-[-0.03em]">
+            Depois que começamos a trabalhar juntos, meu custo por lead caiu 45% e as vendas aumentaram. Finalmente entendi o poder de uma gestão profissional.
+          </p>
+          <div class="mt-7 text-white/80">
+            <div class="font-semibold text-white">Cliente do nicho de estética</div>
+          </div>
+          <p class="text-white/90 text-xl leading-relaxed mt-8">
+            “Eu tentava fazer as campanhas sozinho, mas nunca funcionava. Hoje tenho novos clientes todos os dias.”
+          </p>
+          <div class="mt-2 text-white/80">Negócio local</div>
+        </div>
+
+        <div class="contact-card p-7 md:p-9">
+          <div class="section-kicker">Modelos de trabalho</div>
+          <h3 class="section-title text-[clamp(1.8rem,3vw,2.5rem)] mb-5">Como podemos trabalhar juntos?</h3>
+          <div class="space-y-4 text-[#3d4654]">
+            <p><strong>Gestão Mensal de Tráfego Pago</strong><br />Para empresas que querem escalar com campanhas rodando todos os dias.</p>
+            <p><strong>Consultoria Estratégica 1:1</strong><br />Ajudando você ou seu time a entender e aplicar estratégias que funcionam.</p>
+            <p><strong>Auditoria de Campanhas</strong><br />Análise completa do que trava seus resultados, com plano de ação.</p>
+          </div>
+          <a class="btn-main btn-primary w-full md:w-auto mt-6" href="#contato">Agendar Chamada Estratégica</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20" id="contato">
+      <div class="site-container">
+        <div class="form-card p-8 md:p-12">
+          <div class="text-center mb-10">
+            <h2 class="section-title text-[clamp(2rem,3vw,2.8rem)]">Solicite uma análise estratégica do seu tráfego pago</h2>
+            <p class="text-[#5f6773] text-lg mt-3">Preencha os campos e receba um direcionamento claro para escalar suas campanhas.</p>
+          </div>
+
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-5" id="lead-form">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-[#56606e] mb-2">Nome</label>
+              <input class="input-base" name="nome" placeholder="Seu nome" required="" type="text" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-[#56606e] mb-2">WhatsApp</label>
+              <input class="input-base" name="whatsapp" placeholder="(00) 00000-0000" required="" type="tel" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-[#56606e] mb-2">Qual é o seu negócio?</label>
+              <input class="input-base" name="negocio" placeholder="Ex.: clínica, loja, infoproduto" required="" type="text" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-[#56606e] mb-2">Investimento mensal em anúncios</label>
+              <select class="input-base" name="investimento" required="">
+                <option value="">Selecione uma faixa</option>
+                <option value="Entre R$ 600 e R$ 1.500">Entre R$ 600 e R$ 1.500</option>
+                <option value="Até R$ 2.000">Até R$ 2.000</option>
+                <option value="R$ 2.000 a R$ 5.000">R$ 2.000 a R$ 5.000</option>
+                <option value="R$ 5.000 a R$ 10.000">R$ 5.000 a R$ 10.000</option>
+                <option value="Acima de R$ 10.000">Acima de R$ 10.000</option>
+              </select>
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-[#56606e] mb-2">Objetivo principal com os anúncios</label>
+              <textarea class="input-base input-area" name="objetivo" placeholder="Ex.: gerar mais leads, vender mais, reduzir custo por resultado..." required=""></textarea>
+            </div>
+            <div class="md:col-span-2 text-center pt-2">
+              <button class="btn-main btn-primary w-full md:w-auto" type="submit">Enviar Solicitação</button>
+            </div>
+          </form>
+
+          <div class="hidden rounded-xl border border-emerald-200 bg-emerald-50 p-8 text-center" id="obrigado">
+            <h3 class="font-['Manrope'] text-2xl font-extrabold text-emerald-800 mb-2">Obrigado pelo envio</h3>
+            <p class="text-emerald-700 mb-4">Recebemos suas informações. Em breve entraremos em contato no WhatsApp informado.</p>
+            <a class="btn-main bg-emerald-600 text-white mx-auto" href="https://wa.me/5512992503045?text=Ol%C3%A1%2C%20acabei%20de%20enviar%20o%20formul%C3%A1rio%20no%20site." rel="noopener noreferrer" target="_blank">Falar no WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-glass py-10">
+    <div class="site-container grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      <div>
+        <div class="font-['Manrope'] font-extrabold text-2xl text-[#0d1b2b]">LM Impulse Ads</div>
+        <p class="text-[#4f5967] mt-2">Tráfego pago com estratégia e precisão para transformar anúncios em lucro real.</p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <a class="text-[#495362] hover:text-[#0f2238]" href="#especialidades">Especialidades</a>
+        <a class="text-[#495362] hover:text-[#0f2238]" href="#processo">Processo</a>
+        <a class="text-[#495362] hover:text-[#0f2238]" href="#insights">Depoimentos</a>
+        <a class="text-[#495362] hover:text-[#0f2238]" href="#contato">Contato</a>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <a aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-white/80 text-[#1c2737] hover:bg-green-500 hover:text-white transition-all flex items-center justify-center" href="https://wa.me/5512992503045?text=Ol%C3%A1%2C%20quero%20uma%20an%C3%A1lise%20estrat%C3%A9gica%20do%20meu%20tr%C3%A1fego%20pago." rel="noopener noreferrer" target="_blank">
+            <span class="material-symbols-outlined">chat</span>
+          </a>
+          <a aria-label="E-mail" class="w-10 h-10 rounded-full bg-white/80 text-[#1c2737] hover:bg-[#17314f] hover:text-white transition-all flex items-center justify-center" href="mailto:lm.impulseads@gmail.com">
+            <span class="material-symbols-outlined">mail</span>
+          </a>
+          <a aria-label="Instagram" class="w-10 h-10 rounded-full bg-white/80 text-[#1c2737] hover:bg-pink-600 hover:text-white transition-all flex items-center justify-center" href="https://www.instagram.com/lm.impulseads?igsh=ZG96am93eTNhNng0" rel="noopener noreferrer" target="_blank">
+            <span class="material-symbols-outlined">photo_camera</span>
+          </a>
+          <a aria-label="Facebook" class="w-10 h-10 rounded-full bg-white/80 text-[#1c2737] hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center" href="https://www.facebook.com/share/1E6JJYL5Ao/" rel="noopener noreferrer" target="_blank">
+            <span class="material-symbols-outlined">thumb_up</span>
+          </a>
+        </div>
+        <div class="flex flex-col gap-1 text-sm">
+          <a class="text-[#495362] hover:text-[#0f2238]" href="politica-de-privacidade.html">Política de Privacidade</a>
+          <a class="text-[#495362] hover:text-[#0f2238]" href="termos-de-uso.html">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+    <div class="site-container text-xs text-[#6b7280] mt-8">© 2026 LM Impulse Ads. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    (function () {
+      const form = document.getElementById("lead-form");
+      const successBox = document.getElementById("obrigado");
+      if (!form || !successBox) return;
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (typeof window.fbq === "function") {
+          window.fbq("track", "Lead");
+        }
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", {
+            event_category: "lead_form",
+            event_label: "landing_page_form",
+          });
+        }
+        if (Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: "lead_form_submit" });
+        }
+
+        form.classList.add("hidden");
+        successBox.classList.remove("hidden");
+        window.location.hash = "obrigado";
+      });
+    })();
+  </script>
+</body>
+</html>
